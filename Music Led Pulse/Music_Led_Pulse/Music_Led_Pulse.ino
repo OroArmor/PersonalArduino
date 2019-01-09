@@ -16,7 +16,7 @@ void setup() {
 
 void loop() {
   tick++;
-  if (tick%waitDelay == 0) {
+  if (tick % waitDelay == 0 ) {
     int errorFix = 255 / 6;
     writeColor(255 - errorFix * ((redAv) / (waitDelay)), 255 - errorFix * ((greenAv) / (waitDelay) ), 255 - errorFix * ((blueAv)  / (waitDelay) ));
     redAv = 0;
@@ -52,15 +52,15 @@ void writeColor(int r, int g, int b) {
 
 
   if (r == 0 && g == 0 && b == 0) {
-    calculateRGB(tick/30 % 360);
+    calculateRGB(tick / 30 % 360);
     Serial.println(tick);
     return;
   }
 
-//  Serial.println(r);
-//  Serial.println(g);
-//  Serial.println(b);
-//  Serial.println();
+  //  Serial.println(r);
+  //  Serial.println(g);
+  //  Serial.println(b);
+  //  Serial.println();
 
   analogWrite(6, 255 - g);
   analogWrite(5, 255 - r);
