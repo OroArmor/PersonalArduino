@@ -10,8 +10,6 @@ void setup() {
   pinMode(3, OUTPUT);
   pinMode(5, OUTPUT);
   pinMode(6, OUTPUT);
-
-  Serial.begin(9600);
 }
 
 void loop() {
@@ -28,6 +26,10 @@ void loop() {
   blueAv += analogRead(A5);
 
   //writeColor(255,0,0);
+
+  if(tick < 0){
+    tick = 0;
+  }
 }
 
 void writeColor(int r, int g, int b) {
@@ -52,16 +54,9 @@ void writeColor(int r, int g, int b) {
 
 
   if (r == 0 && g == 0 && b == 0) {
-    calculateRGB(tick / 30 % 360);
-    Serial.println(tick);
+    calculateRGB(tick / waitDelay % 360);
     return;
   }
-
-  //  Serial.println(r);
-  //  Serial.println(g);
-  //  Serial.println(b);
-  //  Serial.println();
-
   analogWrite(6, 255 - g);
   analogWrite(5, 255 - r);
   analogWrite(3, 255 - b);
