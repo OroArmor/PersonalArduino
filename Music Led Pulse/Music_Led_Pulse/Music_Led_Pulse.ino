@@ -10,12 +10,13 @@ void setup() {
   pinMode(3, OUTPUT);
   pinMode(5, OUTPUT);
   pinMode(6, OUTPUT);
+//  Serial.begin(3200);
 }
 
 void loop() {
   tick++;
   if (tick % waitDelay == 0 ) {
-    int errorFix = 255 / 6;
+    int errorFix = 255 / 5;
     writeColor(255 - errorFix * ((redAv) / (waitDelay)), 255 - errorFix * ((greenAv) / (waitDelay) ), 255 - errorFix * ((blueAv)  / (waitDelay) ));
     redAv = 0;
     greenAv = 0;
@@ -52,8 +53,12 @@ void writeColor(int r, int g, int b) {
     b = 0;
   }
 
+//   Serial.println("red:".concat(new String(r)));
+//  Serial.println("green:"+new String(g));
+//  Serial.println("blue:"+ new String(b));
+//  
 
-  if (r == 0 && g == 0 && b == 0) {
+  if (r < 50 && g < 50 && b < 50) {
     calculateRGB(tick / waitDelay % 360);
     return;
   }
